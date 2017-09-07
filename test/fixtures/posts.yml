@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  body: MyText
+  title: MyString
+  owner: one
+  owner_type: Owner
+  is_published: false
+
+two:
+  user: two
+  body: MyText
+  title: MyString
+  owner: two
+  owner_type: Owner
+  is_published: false
