@@ -15,15 +15,5 @@
   <%= @post.title %>
 </p>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @post.owner %>
-</p>
-
-<p>
-  <strong>Is published:</strong>
-  <%= @post.is_published %>
-</p>
-
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
