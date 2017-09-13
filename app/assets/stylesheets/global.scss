@@ -1,0 +1,8 @@
+.notification > .delete.is-centered {
+  right: 1.5em;
+  top: calc(50% - 10px);
+}
+
+.notification.js-flash {
+  margin-bottom: 0;
+}

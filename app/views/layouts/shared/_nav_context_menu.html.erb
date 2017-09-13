@@ -1,0 +1,15 @@
+<div class="navbar-item has-dropdown is-hoverable">
+  <a class="navbar-link " href="http://bulma.io/blog/">
+    <img style="margin-right: 0.5em;" src="<%= current_user.gravatar_url(32) %>" />
+    <span><%= current_user.email %></span>
+  </a>
+  <div class="navbar-dropdown">
+    <%= link_to('Account', edit_user_registration_path, class: 'navbar-item') %>
+
+    <a class="navbar-item " href="/admin">
+      Admin
+    </a>
+
+    <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'navbar-item') %>
+  </div>
+</div>

@@ -14,3 +14,29 @@
 //= require turbolinks
 //= require_directory .
 //= require_directory ./channels
+
+function smoothFadeOut(el, callback) {
+  var $el = $(el);
+
+  $el.animate({
+    opacity: 0
+  }, 150, function () {
+    $el.animate({
+      height: 0,
+      padding: 0,
+    }, 150, function () {
+      $el.remove();
+
+      if (callback) {
+        callback();
+      }
+    });
+  });
+}
+
+$(function () {
+  $('body').on('click', '.delete', function (event) {
+    var flashEl = $(event.target).closest('.js-flash');
+    smoothFadeOut(flashEl);
+  });
+});

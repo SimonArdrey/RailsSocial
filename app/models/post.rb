@@ -16,5 +16,21 @@ class Post < ApplicationRecord
   validates :postable, presence: true
   validates :postable_type, presence: true
   validates :body, presence: true
-  validates :status, presence: true, :inclusion => { :in => STATUS_OPTIONS }
+  validates :status, presence: true, :inclusion => {
+    in: statuses.keys,
+    message: "%{value} is not a valid Post status"
+  }
+
+  after_initialize :set_defaults, unless: :persisted?
+  after_initialize :corrections
+
+  def set_defaults
+    # Set author to current user.
+    self.user = current_user;
+    self.status = "draft"
+  end
+
+  def corrections
+    # status == :draft if status == nil
+  end
 end

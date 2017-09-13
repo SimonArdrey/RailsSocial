@@ -1,10 +1,9 @@
-class PostsController < InheritedResources::Base
+class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_postable
 
   def index
     @posts = Post.all
-    puts @postable_type
   end
 
   def show
@@ -19,11 +18,12 @@ class PostsController < InheritedResources::Base
 
   def create
     @post = Post.new(post_params)
+    # Set author
     @post.user = current_user
 
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Test was successfully created.' }
+      if @postable.posts << @post
+        format.html { redirect_to [@postable, @post], notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
@@ -34,8 +34,8 @@ class PostsController < InheritedResources::Base
 
   def update
     respond_to do |format|
-      if @post.update(test_params)
-        format.html { redirect_to @post, notice: 'Test was successfully updated.' }
+      if @post.update(post_params)
+        format.html { redirect_to [@postable, @post], notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -45,30 +45,52 @@ class PostsController < InheritedResources::Base
   end
 
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to tests_url }
-      format.json { head :no_content }
+    if @post.user != current_user
+      respond_to do |format|
+        format.html { redirect_to [@postable, @post], error: 'Forbidden.' }
+        format.json { render json: @post.errors, status: :forbidden }
+      end
+    else
+      @post.destroy
+      respond_to do |format|
+        format.html { redirect_to [@postable, Post] }
+        format.json { head :no_content }
+      end
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    def set_postable
-      @modelClass = params[:postable_type].capitalize.constantize
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-      if params[:user_id]
-        postable_id = params[:user_id]
+  def get_postable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return $1.classify.constantize.find(value)
       end
-      
-      @postable = modelClass.find(posable_id)
     end
+    nil
+  end
 
-    def post_params
-      params.require(:body).permit(:title)
-    end
+  def set_postable
+    # if params[:postable_type]
+    #  @postable_class = params[:postable_type].capitalize.constantize
+    # end
+
+    # if params[:user_id]
+    #   @postable = User.find(params[:user_id])
+    # else
+    #   # Default to current users wall.
+    #   @postable = current_user;
+    # end
+
+    @postable = get_postable;
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
 end

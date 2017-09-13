@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :wall_posts, as: :postable, class_name: "Post"
-  has_many :posts
+  has_many :posts, as: :postable, class_name: "Post"
+  has_many :author_posts, class_name: "Post"
 
   def gravatar_url(size=48)
     gravatar_id = Digest::MD5.hexdigest(email.downcase)

@@ -1,17 +1,13 @@
 <% if flash.notice %>
-  <div class="alert alert-primary alert-dismissible fade show" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <strong></strong> <%= flash.notice %>
+  <div class="notification is-info is-radiusless js-flash">
+    <button class="delete is-centered"></button>
+    <%= flash.notice %>
   </div>
 <% end %>
 
 <% if flash.alert %>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <strong></strong> <%= flash.alert %>
+  <div class="notification is-danger is-radiusless js-flash">
+    <button class="delete is-centered"></button>
+    <%= flash.alert %>
   </div>
 <% end %>
