@@ -1,3 +1,4 @@
+// Add centered delete button helper to notifications.
 .notification > .delete.is-centered {
   right: 1.5em;
   top: calc(50% - 10px);
@@ -5,4 +6,19 @@
 
 .notification.js-flash {
   margin-bottom: 0;
+}
+
+// Create margin and padding helpers.
+$sizes: (0, 1, 2, 3, 4);
+$positions: (t: top, l: left, b: bottom, r: right);
+
+@each $size in $sizes {
+  @each $symbol, $position in $positions {
+    .m#{$symbol}-#{$size} {
+      margin-#{$position}: $size + em;
+    }
+    .p#{$symbol}-#{$size} {
+      padding-#{$position}: $size + em;
+    }
+  }
 }

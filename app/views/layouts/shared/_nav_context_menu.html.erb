@@ -1,15 +1,51 @@
 <div class="navbar-item has-dropdown is-hoverable">
-  <a class="navbar-link " href="http://bulma.io/blog/">
-    <img style="margin-right: 0.5em;" src="<%= current_user.gravatar_url(32) %>" />
+  <a class="navbar-link " href="#">
     <span><%= current_user.email %></span>
+    <img style="margin-left: 0.5em;" src="<%= current_user.gravatar_url(32) %>" />
   </a>
   <div class="navbar-dropdown">
-    <%= link_to('Account', edit_user_registration_path, class: 'navbar-item') %>
+    <%= link_to(edit_user_registration_path, class: 'navbar-item') do %>
+      <span class="icon has-text-info">
+        <i class="fa fa-cogs"></i>
+      </span>
+      Account
+    <% end %>
 
-    <a class="navbar-item " href="/admin">
+    <a class="navbar-item" href="/admin">
+      <span class="icon has-text-info">
+        <i class="fa fa-database"></i>
+      </span>
       Admin
     </a>
 
-    <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'navbar-item') %>
+    <%= link_to(destroy_user_session_path, method: :delete, class: 'navbar-item') do %>
+      <span class="icon has-text-danger">
+        <i class="fa fa-sign-out"></i>
+      </span>
+      Logout
+    <% end %>
   </div>
 </div>
+
+<!--
+<a href="#" class="navbar-item">
+  <div class="level is-mobile">
+    <div class="level-left">
+      <div class="level-item">
+        <p>
+          <strong>Extensions</strong>
+          <br>
+          <small>Side projects to enhance Bulma</small>
+        </p>
+      </div>
+    </div>
+    <div class="level-right">
+      <div class="level-item">
+        <span class="icon has-text-info">
+          <i class="fa fa-plug"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</a>
+-->

@@ -1,7 +1,7 @@
-<nav class="navbar">
+<nav class="navbar is-light">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      Social
+      <%= image_tag "ca-logo-full.png" %>
     </a>
 
     <div class="navbar-burger burger" data-target="navMenuTransparentExample">
@@ -14,12 +14,18 @@
   <div id="navMenuTransparentExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item " href="http://bulma.io/expo/">
+        <span class="icon">
+          <i class="fa fa-home"></i>
+        </span>
         Home
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link " href="http://bulma.io/blog/">
-          Blog
+          <span class="icon">
+            <i class="fa fa-question"></i>
+          </span>
+          Questions
         </a>
         <div id="blogDropdown" class="navbar-dropdown" data-style="width: 18rem;">
           <a class="navbar-item" href="/2017/08/03/list-of-tags/">
@@ -50,32 +56,17 @@
           </a>
 
           <a class="navbar-item" href="http://bulma.io/blog/">
-            More posts
+            More Questions
           </a>
-          <hr class="navbar-divider">
-          <div class="navbar-item">
-            <div class="navbar-content">
-              <div class="level is-mobile">
-                <div class="level-left">
-                  <div class="level-item">
-                    <strong>Stay up to date!</strong>
-                  </div>
-                </div>
-                <div class="level-right">
-                  <div class="level-item">
-                    <a class="button bd-is-rss is-small" href="http://bulma.io/atom.xml">
-                      <span class="icon is-small">
-                        <i class="fa fa-rss"></i>
-                      </span>
-                      <span>Subscribe</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+
+      <a class="navbar-item " href="http://bulma.io/expo/">
+        <span class="icon">
+          <i class="fa fa-file-text-o"></i>
+        </span>
+        Resources
+      </a>
     </div>
 
     <div class="navbar-end">

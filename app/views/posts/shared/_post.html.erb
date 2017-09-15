@@ -1,0 +1,64 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="<%= post.user.gravatar_url(128) %>" alt="Avatar" style="border-radius: 50%;">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong><%= post.user.email %></strong><small><%= post.created_at %></small>
+        <br>
+        <%= post.body %>
+      </p>
+    </div>
+    <nav class="level is-mobile">
+      <div class="level-left">
+        <a class="level-item">
+          <span class="icon is-small"><i class="fa fa-heart"></i></span>
+        </a>
+      </div>
+    </nav>
+  </div>
+  <div class="media-right">
+    <div class="dropdown is-hoverable is-right">
+      <div class="dropdown-trigger">
+        <button class="button is-white" aria-haspopup="true" aria-controls="dropdown-menu2">
+          <span class="icon">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+        <div class="dropdown-content">
+          <!--
+          <div class="dropdown-item">
+            <span class="tag is-primary"><%= post.status %></span>
+          </div>
+          <hr class="dropdown-divider">
+          -->
+          <%= link_to polymorphic_path([@postable, post]), class: "dropdown-item" do %>
+            <span class="icon">
+              <i class="fa fa-eye"></i>
+            </span>
+            View
+          <% end %>
+
+          <%= link_to edit_polymorphic_path([@postable, post]), class: "dropdown-item" do %>
+            <span class="icon">
+              <i class="fa fa-pencil"></i>
+            </span>
+            Edit
+          <% end %>
+
+          <%= link_to polymorphic_path([@postable, post]), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" do %>
+            <span class="icon has-text-danger">
+              <i class="fa fa-trash-o"></i>
+            </span>
+            Delete
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

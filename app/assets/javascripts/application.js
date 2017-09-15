@@ -35,8 +35,14 @@ function smoothFadeOut(el, callback) {
 }
 
 $(function () {
-  $('body').on('click', '.delete', function (event) {
+  $('body').on('click', '.js-flash .delete', function (event) {
     var flashEl = $(event.target).closest('.js-flash');
     smoothFadeOut(flashEl);
+  });
+});
+
+$(function () {
+  $('body').on('click', '.has-dropdown', function (event) {
+    // TODO: Get around to this.
   });
 });

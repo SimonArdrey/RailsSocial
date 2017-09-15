@@ -1,33 +1,43 @@
-<div class="row justify-content-center">
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <h2>Log in</h2>
+<section class="section">
+  <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+      <h1 class="title">Log in</h1>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <% f.options[:html][:class] << ' mb-3' %>
-      <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, class: "form-control", "aria-describedby" => "emailHelp", placeholder: "Enter email" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
-      </div>
-
-      <% if devise_mapping.rememberable? -%>
-        <div class="form-check">
-          <%= f.label :remember_me, class: "form-check-label" do %>
-            <%= f.check_box :remember_me, class: "form-check-input" %>
-            <%= t('helpers.label.remember_me').html_safe %>
-          <% end %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <% f.options[:html][:class] << ' mb-2' %>
+        <div class="field">
+          <%= f.label :email, class: "label" %>
+          <div class="control">
+            <%= f.email_field :email, autofocus: true, class: "input", "aria-describedby" => "emailHelp", placeholder: "Enter email" %>
+          </div>
         </div>
-      <% end -%>
 
-      <div class="actions">
-        <%= f.submit "Log in", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+        <div class="field">
+          <%= f.label :password, class: "label" %>
+          <div class="control">
+            <%= f.password_field :password, autocomplete: "off", class: "input", placeholder: "Password" %>
+          </div>
+        </div>
 
-    <%= render "users/shared/links" %>
+        <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <div class="control">
+              <%= f.label :remember_me, class: "checkbox" do %>
+                <%= f.check_box :remember_me, class: "checkbox" %>
+                <%= t('helpers.label.remember_me').html_safe %>
+              <% end %>
+            </div>
+          </div>
+        <% end -%>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <%= f.submit "Log in", class: "button is-primary" %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= render "users/shared/links" %>
+    </div>
   </div>
-</div>
+</section>

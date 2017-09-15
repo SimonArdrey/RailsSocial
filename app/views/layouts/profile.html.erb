@@ -1,0 +1,57 @@
+<%= render 'layouts/shared/essentials' do %>
+  <section class="hero is-info is-small is-bold">
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+      <div class="container "><!--has-text-centered-->
+        <div class="columns">
+          <div class="column is-narrow">
+            <figure class="image is-128x128" style="">
+              <img src="<%= current_user.gravatar_url(256) %>" style="border-radius: 10%; border: 2px solid #fff;">
+            </figure>
+          </div>
+          <div class="column">
+            <h1 class="title">
+              Simon Ardrey
+              <div class="tags has-addons inline-block">
+                <span class="tag" style="font-size: 0.3em;">Teacher</span>
+                <span class="tag is-primary" style="font-size: 0.3em;">Brisbane</span>
+              </div>
+            </h1>
+            <h2 class="subtitle">
+              Whoo Yeah
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero footer: will stick at the bottom -->
+    <div class="hero-foot">
+      <nav class="tabs is-boxed">
+        <div class="container">
+          <ul>
+            <li><a>Profile</a></li>
+            <li class="is-active"><a>Activity</a></li>
+            <!--<li><a>Friends</a></li>
+            <li><a>Networks</a></li>
+            <li><a>Questions</a></li>-->
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <div class="container">
+    <section>
+    <div class="columns">
+      <div class="column is-three-quarters">
+        <%= yield %>
+      </div>
+
+      <div class="column">
+        <%= yield :sidebar %>
+      </div>
+    </div>
+  </section>
+  </div>
+<% end %>
