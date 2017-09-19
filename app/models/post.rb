@@ -25,8 +25,6 @@ class Post < ApplicationRecord
   after_initialize :corrections
 
   def set_defaults
-    # Set author to current user.
-    self.user = current_user;
     self.status = "draft"
   end
 

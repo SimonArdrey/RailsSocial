@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   devise_for :users, path: "/account"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users do
-    resources :posts, postable_type: "User"
+  resources :posts
+  resources :users, path: "profiles", controller: "profiles", param: :slug do
+    resources :posts, controller: "users_posts", postable_type: "User"
   end
 end

@@ -1,20 +1,28 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_new_post, only: [:index, :new]
   before_action :set_postable
-  layout 'profile'
+
+  layout "posts"
 
   def index
-    @posts = Post.all
+    @default_layout_title = "Posts"
+    @posts = Post
+      .includes(:postable)
+      .order(created_at: :desc)
+      .limit(20)
   end
 
   def show
+    @default_layout_title = "Post"
   end
 
   def new
-    @post = Post.new
+    @default_layout_title = "Write Post"
   end
 
   def edit
+    @default_layout_title = "Edit Post"
   end
 
   def create
@@ -64,31 +72,24 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post
+      .includes(:postable)
+      .find(params[:id])
   end
 
-  def get_postable
-    params.each do |name, value|
-      if name =~ /(.+)_id$/
-        return $1.classify.constantize.find(value)
-      end
-    end
-    nil
+  def set_new_post
+    @post = Post.new
+    @post.user = current_user
   end
 
   def set_postable
-    # if params[:postable_type]
-    #  @postable_class = params[:postable_type].capitalize.constantize
-    # end
-
-    # if params[:user_id]
-    #   @postable = User.find(params[:user_id])
-    # else
-    #   # Default to current users wall.
-    #   @postable = current_user;
-    # end
-
-    @postable = get_postable;
+    if params[:postable_type] and params[:postable_param]
+      @postable_class = params[:postable_type].capitalize.constantize
+      @postable = @postable_class.find(params[params[:postable_param]])
+    elsif params[:postable_type] and params[:postable_id]
+      @postable_class = params[:postable_type].capitalize.constantize
+      @postable = @postable_class.find(params[:postable_id])
+    end
   end
 
   def post_params

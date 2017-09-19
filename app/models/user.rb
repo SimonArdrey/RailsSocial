@@ -7,10 +7,26 @@ class User < ApplicationRecord
   has_many :posts, as: :postable, class_name: "Post"
   has_many :author_posts, class_name: "Post"
 
+  # validates_uniqueness_of :slug
+
   def gravatar_url(size=48)
     gravatar_id = Digest::MD5.hexdigest(email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
+
+  def to_s
+    email
+  end
+
+=begin
+  def to_param
+    [name.parameterize].join("-")
+  end
+
+  def self.find_by_param(input)
+    find_by_slug(input)
+  end
+=end
 end
 
 =begin
