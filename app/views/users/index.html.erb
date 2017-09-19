@@ -1,0 +1,49 @@
+<section class="hero is-info is-small is-bold">
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container "><!--has-text-centered-->
+        <h1 class="title">
+          Discover People
+        </h1>
+        <h2 class="subtitle">
+        </h2>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns">
+
+      <% @users.each do |user| %>
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    <img src="<%= user.gravatar_url(96) %>" alt="Avatar">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="title is-4"><%= user.display_name %></p>
+                  <p class="subtitle is-6"><%= link_to "@#{user.slug}", user_path(user) %></p>
+                </div>
+              </div>
+
+              <div class="content">
+                <time datetime="<%= user.created_at %>"><%= user.created_at %></time>
+              </div>
+            </div>
+
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item">Follow</a>
+              <%= link_to "View", user_path(user), class: "card-footer-item" %>
+            </footer>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  <div>
+</section>

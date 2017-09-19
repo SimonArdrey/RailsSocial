@@ -20,8 +20,9 @@
               -->
             </h1>
             <h2 class="subtitle">
-              <%= @user.slug %>
+              <%= @user.slug %> / <%= @user.email %>
             </h2>
+            <span><%= @user_post_count %> posts</span>
           </div>
         </div>
       </div>
@@ -34,6 +35,7 @@
           <ul>
             <li class="<%= active_class user_path(@user) %>"><%= link_to "Profile", user_path(@user) %></li>
             <li class="<%= active_class polymorphic_path([@user, Post]) %>"><%= link_to 'Posts', polymorphic_path([@user, Post]) %></li>
+            <li><a>Connections</a></li>
             <!--<li><a>Friends</a></li>
             <li><a>Networks</a></li>
             <li><a>Questions</a></li>-->
@@ -50,7 +52,6 @@
       </div>
 
       <div class="column">
-
         <%= yield :sidebar %>
       </div>
     </div>

@@ -1,1 +1,26 @@
-Woo ho
+<section class="section">
+  <h1 class="title"><%= @user.display_name %></h1>
+  <h2 class="subtitle"><%= @user.slug %> / <%= @user.email %></h2>
+
+  <br>
+  <% if @user == current_user %>
+    <div class="field">
+      <%= link_to(edit_user_registration_path, class: 'button is-primary') do %>
+        <span class="icon">
+          <i class="fa fa-cogs"></i>
+        </span>
+        <span>Account</span>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
+<section class="mt-2">
+  <% if @postable %>
+    <%= render 'posts/form', post: @post, postable: @postable %>
+  <% end %>
+
+  <% @posts.each do |post| %>
+   <%= render 'posts/shared/post', post: post, postable: @postable %>
+  <% end %>
+</section>

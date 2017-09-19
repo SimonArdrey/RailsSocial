@@ -1,4 +1,5 @@
 <%= form_with(model: [postable, post], local: true) do |form| %>
+  <% #form.options[:html][:class] << ' mb-2' %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>

@@ -1,6 +1,6 @@
 <div class="navbar-item has-dropdown is-hoverable">
   <a class="navbar-link " href="#">
-    <span><%= current_user.email %></span>
+    <span><%= current_user.display_name %></span>
     <img style="margin-left: 0.5em;" src="<%= current_user.gravatar_url(32) %>" />
   </a>
   <div class="navbar-dropdown">
