@@ -7,10 +7,18 @@ class PostsController < ApplicationController
 
   def index
     @default_layout_title = "Posts"
-    @posts = Post
-      .includes(:postable)
-      .order(created_at: :desc)
-      .limit(20)
+
+    if @postable
+      @posts = Post
+        .includes(:postable, :user)
+        .order(created_at: :desc)
+        .limit(20)
+    else
+      @posts = @postable.posts
+        .includes(:postable, :user)
+        .order(created_at: :desc)
+        .limit(20)
+    end
   end
 
   def show

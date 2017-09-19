@@ -1,10 +1,11 @@
 class User < ApplicationRecord
+  include Postable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :posts, as: :postable, class_name: "Post"
   has_many :author_posts, class_name: "Post"
 
   # validates_uniqueness_of :slug
@@ -14,19 +15,22 @@ class User < ApplicationRecord
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
-  def to_s
-    email
+  def display_name
+    "#{first_name} #{last_name}"
   end
 
-=begin
+  def to_s
+    display_name
+  end
+
   def to_param
-    [name.parameterize].join("-")
+    # [name.parameterize].join("-")
+    slug
   end
 
   def self.find_by_param(input)
     find_by_slug(input)
   end
-=end
 end
 
 =begin
