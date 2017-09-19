@@ -42,16 +42,15 @@
   </section>
 
   <div class="container">
-    <section>
     <div class="columns">
       <div class="column is-three-quarters">
         <%= yield %>
       </div>
 
       <div class="column">
+        
         <%= yield :sidebar %>
       </div>
     </div>
-  </section>
   </div>
 <% end %>

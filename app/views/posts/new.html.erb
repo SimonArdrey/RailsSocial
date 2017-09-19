@@ -1,5 +1,13 @@
-<h1>New Post</h1>
-
-<%= render 'form', post: @post, postable: @postable %>
-
-<%= link_to 'Back', polymorphic_path([@postable, Post]) %>
+<% if !@postable %>
+  <section class="mt-2">
+    <div class="notification is-warning">
+      Can't create post when no postable owner is set.
+    </div>
+    <%= link_to 'Back', polymorphic_path(Post) %>
+  </section>
+<% else %>
+  <section class="mt-2">
+    <%= render 'form', post: @post, postable: @postable %>
+    <%= link_to 'Back', polymorphic_path([@postable, Post]) %>
+  </section>
+<% end %>

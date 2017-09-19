@@ -37,21 +37,21 @@
           </div>
           <hr class="dropdown-divider">
           -->
-          <%= link_to polymorphic_path([@postable, post]), class: "dropdown-item" do %>
+          <%= link_to polymorphic_path([post.postable, post]), class: "dropdown-item" do %>
             <span class="icon">
               <i class="fa fa-eye"></i>
             </span>
             View
           <% end %>
 
-          <%= link_to edit_polymorphic_path([@postable, post]), class: "dropdown-item" do %>
+          <%= link_to edit_polymorphic_path([post.postable, post]), class: "dropdown-item" do %>
             <span class="icon">
               <i class="fa fa-pencil"></i>
             </span>
             Edit
           <% end %>
 
-          <%= link_to polymorphic_path([@postable, post]), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" do %>
+          <%= link_to polymorphic_path([post.postable, post]), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item" do %>
             <span class="icon has-text-danger">
               <i class="fa fa-trash-o"></i>
             </span>
