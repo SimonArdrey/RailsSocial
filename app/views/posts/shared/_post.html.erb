@@ -7,9 +7,9 @@
   <div class="media-content">
     <div class="content">
       <p>
-        <strong><%= post.user.email %></strong><small><%= post.created_at %></small>
+        <strong><%= post.user.display_name %></strong> <small> &mdash; <%= time_ago_in_words(post.created_at) %> ago</small>
         <br>
-        <%= post.body %>
+        <%= markdown(post.body) %>
       </p>
     </div>
     <nav class="level is-mobile">

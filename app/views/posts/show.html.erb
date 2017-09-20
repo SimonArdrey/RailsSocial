@@ -1,19 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user.email %>
-</p>
+<section class="mt-2 mb-2">
+  <article class="media mb-1">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img src="<%= @post.user.gravatar_url(128) %>" alt="Avatar">
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+          <h1 class="title is-4 mt-0"><%= @post.title %></h1>
+          <h2 class="subtitle is-6">
+            <strong><%= @post.user.display_name %></strong>
+            <small>@<%= link_to @post.user.slug, user_path(@post.user) %></small>
+            <small> &mdash; <%= time_ago_in_words(@post.created_at) %> ago</small>
+          </h2>
+      </div>
+    </div>
+  </article>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
+  <article>
+    <div class="content">
+      <%= markdown(@post.body) %>
+    </div>
+  </article>
+</section>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<%= link_to 'Edit', edit_polymorphic_path([@postable, @post]) %> |
-<%= link_to 'Back', polymorphic_path([@postable, Post]) %>
+<%= link_to 'Edit', edit_polymorphic_path([@postable, @post]), class: "button" %>
+<%= link_to 'Back', polymorphic_path([@postable, Post]), class: "button" %>

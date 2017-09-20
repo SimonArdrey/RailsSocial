@@ -32,14 +32,35 @@
     <div class="hero-foot">
       <nav class="tabs is-boxed">
         <div class="container">
-          <ul>
-            <li class="<%= active_class user_path(@user) %>"><%= link_to "Profile", user_path(@user) %></li>
-            <li class="<%= active_class polymorphic_path([@user, Post]) %>"><%= link_to 'Posts', polymorphic_path([@user, Post]) %></li>
-            <li><a>Connections</a></li>
-            <!--<li><a>Friends</a></li>
-            <li><a>Networks</a></li>
-            <li><a>Questions</a></li>-->
-          </ul>
+
+          <div class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <ul>
+                  <li class="<%= active_class user_path(@user) %>"><%= link_to "Profile", user_path(@user) %></li>
+                  <li class="<%= active_class polymorphic_path([@user, Post]) %>"><%= link_to 'Posts', polymorphic_path([@user, Post]) %></li>
+                  <li><a>Connections</a></li>
+                  <!--<li><a>Friends</a></li>
+                  <li><a>Networks</a></li>
+                  <li><a>Questions</a></li>-->
+                </ul>
+              </div>
+            </div>
+
+            <div class="level-right">
+              <div class="level-item">
+                <ul>
+                  <li>
+                    <%= link_to(edit_user_registration_path, class: '') do %>
+                      <span class="icon">
+                        <i class="fa fa-cogs"></i>
+                      </span>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </nav>
     </div>

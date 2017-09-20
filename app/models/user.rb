@@ -19,6 +19,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def type
+    :basic
+  end
+
   def to_s
     display_name
   end

@@ -12,7 +12,8 @@ class UsersController < ApplicationController
       .includes(:postable, :user)
       .order(created_at: :desc)
       .limit(20)
-      @post = Post.new
-      @post.user = current_user
+
+    @post = Post.new
+    @post.user = current_user
   end
 end
