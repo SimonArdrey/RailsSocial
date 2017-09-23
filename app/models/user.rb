@@ -7,8 +7,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :author_posts, class_name: "Post"
+  before_validation :set_slug
 
-  # validates_uniqueness_of :slug
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true
+  validates :slug, presence: true
+  validates_uniqueness_of :slug
+
+  # attribute :first_name, :string
 
   def gravatar_url(size=48)
     gravatar_id = Digest::MD5.hexdigest(email.downcase)
@@ -33,7 +40,25 @@ class User < ApplicationRecord
   end
 
   def self.find_by_param(input)
-    find_by_slug(input)
+    find_by_slug(input.downcase)
+  end
+
+  private
+
+  def set_slug
+    # Guard clause, only update slug if names have changed.
+    return unless (first_name_changed? or last_name_changed?)
+
+    self.slug = "#{first_name.downcase}.#{last_name.downcase}"
+    return unless User.where(slug: slug).exists?
+
+    # Max out at 10 attempts
+    10.times do
+      self.slug = "#{first_name.downcase}.#{last_name.downcase}.#{SecureRandom.random_number(10)}"
+      break unless User.where(slug: slug).exists?
+    end
+
+    # TODO: Handle case when loop completes. Low chance right now.
   end
 end
 

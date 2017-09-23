@@ -11,16 +11,54 @@
 <section class="section">
   <div class="columns">
     <div class="column is-half is-offset-one-quarter">
-      <h1 class="title">Edit <%= resource_name.to_s.humanize %></h1>
+      <h1 class="title">Edit Account</h1>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <% f.options[:html][:class] << ' mb-2' %>
-        <%= devise_error_messages! %>
+
+        <% if resource.errors.any? %>
+          <article class="message is-danger">
+            <div class="message-body">
+              <%= devise_error_messages! %>
+            </div>
+          </article>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :first_name, class: "label" %>
+          <div class="control">
+            <%= f.text_field :first_name, autofocus: true, class: "input", placeholder: "Enter first name" %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :last_name, class: "label" %>
+          <div class="control">
+            <%= f.text_field :last_name, class: "input", placeholder: "Enter last name" %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= f.label :slug, "Username / Slug", class: "label" %>
+          <div class="control has-icons-left has-icons-right">
+            <%= f.text_field :slug, class: "input", disabled: true%>
+            <span class="icon is-small is-left">
+              <i class="fa fa-user"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fa fa-check"></i>
+            </span>
+          </div>
+          <!--<p class="help is-success">This username is available</p>-->
+        </div>
 
         <div class="field">
           <%= f.label :email, class: "label" %>
-          <div class="control">
-            <%= f.email_field :email, autofocus: true, class: "input" %>
+          <div class="control has-icons-left">
+            <%= f.email_field :email, class: "input" %>
+            <span class="icon is-small is-left">
+              <i class="fa fa-envelope"></i>
+            </span>
           </div>
         </div>
 
@@ -48,11 +86,16 @@
           </div>
         </div>
 
+        <hr />
+
         <div class="field">
           <%= f.label :current_password, class: "label" %>
-          <div class="control">
-            <%= f.password_field :current_password, autocomplete: "off", class: "input" %>
-            <p class="help is-info">We need your current password to confirm your changes</p>
+          <div class="control has-icons-left">
+            <%= f.password_field :current_password, autocomplete: "off", class: "input is-danger" %>
+            <span class="icon is-small is-left">
+              <i class="fa fa-key"></i>
+            </span>
+            <p class="help is-danger">We need your current password to confirm your changes</p>
           </div>
         </div>
 
