@@ -83,7 +83,7 @@ class PostsController < ApplicationController
   def set_post
     @post = Post
       .includes(:postable)
-      .find(params[:id])
+      .find(params[:id].to_i)
   end
 
   def set_new_post

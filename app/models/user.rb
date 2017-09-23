@@ -35,12 +35,18 @@ class User < ApplicationRecord
   end
 
   def to_param
-    # [name.parameterize].join("-")
-    slug
+    return slug unless slug.empty?
+    id
   end
 
-  def self.find_by_param(input)
-    find_by_slug(input.downcase)
+  def self.find_by_param(param)
+    user = find_by_slug(param.downcase)
+
+    if not user
+      user = find(param.to_i)
+    end
+
+    user
   end
 
   private

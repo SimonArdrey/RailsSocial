@@ -22,13 +22,13 @@ class Post < ApplicationRecord
   }
 
   after_initialize :set_defaults, unless: :persisted?
-  after_initialize :corrections
+  # after_initialize :corrections
 
   def set_defaults
     self.status = "draft"
   end
 
-  def corrections
-    # status == :draft if status == nil
+  def to_param
+    "#{id.to_s}-#{[title.parameterize].join("-")}"
   end
 end
