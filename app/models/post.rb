@@ -24,6 +24,10 @@ class Post < ApplicationRecord
   after_initialize :set_defaults, unless: :persisted?
   # after_initialize :corrections
 
+  def type
+    :update
+  end
+
   def set_defaults
     self.status = "draft"
   end

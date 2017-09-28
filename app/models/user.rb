@@ -12,8 +12,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
-  validates :slug, presence: true
-  validates_uniqueness_of :slug
+  validates :slug, presence: true, uniqueness: true
+  # validates_uniqueness_of :slug
 
   # attribute :first_name, :string
 
@@ -24,10 +24,6 @@ class User < ApplicationRecord
 
   def display_name
     "#{first_name} #{last_name}"
-  end
-
-  def type
-    :basic
   end
 
   def to_s

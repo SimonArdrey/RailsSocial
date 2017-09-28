@@ -5,8 +5,8 @@
       <div class="container "><!--has-text-centered-->
         <div class="columns">
           <div class="column is-narrow">
-            <figure class="image is-128x128" style="">
-              <img src="<%= @user.gravatar_url(256) %>" style="border-radius: 10%; border: 2px solid #fff;">
+            <figure class="image is-64x64" style="">
+              <img src="<%= @user.gravatar_url(128) %>" style="border-radius: 10%; border: 2px solid #fff;">
             </figure>
           </div>
           <div class="column">
@@ -22,7 +22,7 @@
             <h2 class="subtitle">
               <%= @user.slug %> / <%= @user.email %>
             </h2>
-            <span><%= @user_post_count %> posts</span>
+            <!--<span><%= @user_post_count %> posts</span>-->
           </div>
         </div>
       </div>
