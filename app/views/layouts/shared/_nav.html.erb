@@ -22,52 +22,52 @@
         <% end %>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link " href="http://bulma.io/blog/">
+          <%= link_to root_path, class: 'navbar-link' do %>
             <span class="icon">
               <i class="fa fa-question"></i>
             </span>
             Questions
-          </a>
+          <% end %>
           <div id="blogDropdown" class="navbar-dropdown" data-style="width: 18rem;">
-            <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+            <%= link_to root_path, class: 'navbar-item' do %>
               <div class="navbar-content">
                 <p>
                   <small class="has-text-info">03 Aug 2017</small>
                 </p>
                 <p>New feature: list of tags</p>
               </div>
-            </a>
+            <% end %>
 
-            <a class="navbar-item" href="/2017/08/01/bulma-bootstrap-comparison/">
+            <%= link_to root_path, class: 'navbar-item' do %>
               <div class="navbar-content">
                 <p>
                   <small class="has-text-info">01 Aug 2017</small>
                 </p>
                 <p>Bulma / Bootstrap comparison</p>
               </div>
-            </a>
+            <% end %>
 
-            <a class="navbar-item" href="/2017/07/24/access-previous-bulma-versions/">
+            <%= link_to root_path, class: 'navbar-item' do %>
               <div class="navbar-content">
                 <p>
                   <small class="has-text-info">24 Jul 2017</small>
                 </p>
                 <p>Access previous Bulma versions</p>
               </div>
-            </a>
+            <% end %>
 
-            <a class="navbar-item" href="http://bulma.io/blog/">
+            <%= link_to root_path, class: 'navbar-item' do %>
               More Questions
-            </a>
+            <% end %>
           </div>
         </div>
 
-        <a class="navbar-item " href="http://bulma.io/expo/">
+        <%= link_to root_path, class: 'navbar-item' do %>
           <span class="icon">
             <i class="fa fa-file-text-o"></i>
           </span>
           Resources
-        </a>
+        <% end %>
       <% end %>
     </div>
 
