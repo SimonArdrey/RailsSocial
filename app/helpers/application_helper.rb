@@ -37,4 +37,8 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+
+  def prettify_hashtags(text)
+    text.gsub(/(\B#\w\w+)/, '<span class="tag">\1</span>').html_safe;
+  end
 end
