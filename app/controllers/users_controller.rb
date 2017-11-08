@@ -8,10 +8,10 @@ class UsersController < ApplicationController
 
   def show
     @postable = @user
-    @posts = @user.author_posts
-      .includes(:postable, :user)
-      .order(created_at: :desc)
-      .limit(20)
+    @posts = BuildPostsFeed.run!({
+      viewing_user: current_user,
+      author_user: @user,
+    })
 
     @post = Post.new
     @post.user = current_user

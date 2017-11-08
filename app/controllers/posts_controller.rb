@@ -10,15 +10,9 @@ class PostsController < ApplicationController
     @default_layout_title = "Posts"
 
     if @postable
-      @posts = Post
-        .includes(:postable, :user)
-        .order(created_at: :desc)
-        .limit(20)
+      @posts = BuildPostsFeed.run!({ viewing_user: current_user, postable: @postable, page: params[:page] })
     else
-      @posts = @postable.posts
-        .includes(:postable, :user)
-        .order(created_at: :desc)
-        .limit(20)
+      @posts = BuildPostsFeed.run!({ viewing_user: current_user, author_user: current_user })
     end
   end
 
@@ -75,6 +69,12 @@ class PostsController < ApplicationController
         format.json { head :no_content }
       end
     end
+  end
+
+  def like
+  end
+
+  def unlike
   end
 
   private
