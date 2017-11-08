@@ -2,15 +2,15 @@ class Post < ApplicationRecord
   paginates_per 10
 
   STATUS_OPTIONS = {
-    draft: "draft",
-    published: "published",
-    blocked: "blocked"
+    draft: 0,
+    published: 1,
+    blocked: 2
   }
 
   KIND_OPTIONS = {
-    basic: "basic",
-    article: "blog",
-    question: "question"
+    basic: 0,
+    article: 1,
+    question: 2
   }
 
   # Author
@@ -31,17 +31,22 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validates :status, presence: true, :inclusion => {
     in: statuses.keys,
-    message: "%{value} is not a valid Post status"
+    message: "%{value} is not a valid Post status id"
   }
 
   after_initialize :set_defaults, unless: :persisted?
 
+  def status=(value)
+    write_attribute :status, value.to_i
+  end
+
   def set_defaults
+    # I am pretty sure this is wrong
     self.status = "draft"
     self.kind = "basic"
   end
 
   def to_param
-    "#{id.to_s}-#{[title.parameterize].join("-")}"
+    title.empty? ? id : "#{id.to_s}-#{[title.parameterize].join("-")}"
   end
 end

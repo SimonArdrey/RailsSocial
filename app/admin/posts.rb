@@ -1,4 +1,4 @@
-ActiveAdmin.register Post do
+ActiveAdmin.register Post do  
   permit_params :title, :body, :status
 
   index do
@@ -14,7 +14,7 @@ ActiveAdmin.register Post do
 
   filter :status, {
     as: :select,
-    collection: Post::STATUS_OPTIONS,
+    collection: Post::statuses,
   }
 
   filter :created_at
@@ -48,7 +48,7 @@ ActiveAdmin.register Post do
       f.input :body
       f.input :status, {
         as: :select,
-        collection: Post::STATUS_OPTIONS,
+        collection: Post::statuses,
         include_blank: false,
         allow_blank: false
       }
