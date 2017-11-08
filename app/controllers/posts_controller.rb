@@ -89,6 +89,9 @@ class PostsController < ApplicationController
   def set_new_post
     @post = Post.new
     @post.user = current_user
+
+    kind = (params.has_key?(:kind) and Post.kinds.has_key?(params[:kind].to_sym)) ? params[:kind] : 'basic'
+    @post.kind = kind
   end
 
   def set_postable

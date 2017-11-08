@@ -19,11 +19,14 @@
       </p>
     </figure>
     <div class="media-content">
-      <div class="field">
-        <p class="control">
-          <%= form.text_field :title, id: :post_title, class: "input", placeholder: "Add a title..." %>
-        </p>
-      </div>
+      <% if post.kind != "basic" %>
+        <div class="field">
+          <p class="control">
+            <%= form.text_field :title, id: :post_title, class: "input", placeholder: "Add a title..." %>
+          </p>
+        </div>
+      <% end %>
+
       <div class="field">
         <p class="control">
           <%= form.text_area :body, id: :post_body, class: "textarea", placeholder: "Add a comment..." %>

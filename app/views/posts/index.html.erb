@@ -5,6 +5,20 @@
   </div>
 <% end %>
 
+<% content_for(:sidebar) do %>
+  <br />
+  <aside class="menu">
+    <p class="menu-label">
+      Post Type
+    </p>
+    <ul class="menu-list">
+      <li><%= link_to 'Write a Status', polymorphic_path([@postable, Post], kind: 'basic') %></li>
+      <li><%= link_to 'Write a Question', polymorphic_path([@postable, Post], kind: 'question') %></li>
+      <li><%= link_to 'Write an Article', polymorphic_path([@postable, Post], kind: 'article') %></li>
+    </ul>
+  </aside>
+<% end %>
+
 <section class="mt-2">
   <% if @postable %>
     <%= render 'posts/form', post: @post, postable: @postable %>
