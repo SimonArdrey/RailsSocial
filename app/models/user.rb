@@ -51,12 +51,12 @@ class User < ApplicationRecord
     # Guard clause, only update slug if names have changed.
     return unless (first_name_changed? or last_name_changed?)
 
-    self.slug = "#{first_name.downcase}.#{last_name.downcase}"
+    self.slug = "#{first_name.downcase}-#{last_name.downcase}"
     return unless User.where(slug: slug).exists?
 
     # Max out at 10 attempts
     10.times do
-      self.slug = "#{first_name.downcase}.#{last_name.downcase}.#{SecureRandom.random_number(10)}"
+      self.slug = "#{first_name.downcase}-#{last_name.downcase}-#{SecureRandom.random_number(10)}"
       break unless User.where(slug: slug).exists?
     end
 

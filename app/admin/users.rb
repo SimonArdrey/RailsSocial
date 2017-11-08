@@ -1,4 +1,10 @@
 ActiveAdmin.register User do
+  controller do
+    def find_resource
+      scoped_collection.find_by_param(params[:id])
+    end
+  end
+
   permit_params :email, :password, :password_confirmation
 
   index do
