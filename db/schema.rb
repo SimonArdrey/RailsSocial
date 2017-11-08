@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915020703) do
+ActiveRecord::Schema.define(version: 20170928075537) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -52,11 +52,14 @@ ActiveRecord::Schema.define(version: 20170915020703) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "kind", default: "basic", null: false
+    t.integer "parent_id"
+    t.index ["parent_id"], name: "index_posts_on_parent_id"
     t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
+    t.index ["status"], name: "index_posts_on_postable_and_status"
     t.index ["status"], name: "index_posts_on_status"
+    t.index ["status"], name: "index_posts_on_user_and_status"
     t.index ["user_id"], name: "index_posts_on_user_id"
-    t.index [nil, "status"], name: "index_posts_on_postable_and_status"
-    t.index [nil, "status"], name: "index_posts_on_user_and_status"
   end
 
   create_table "users", force: :cascade do |t|

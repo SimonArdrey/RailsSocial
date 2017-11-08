@@ -1,16 +1,29 @@
 class Post < ApplicationRecord
+  paginates_per 10
+
   STATUS_OPTIONS = {
     draft: "draft",
     published: "published",
     blocked: "blocked"
   }
+
+  KIND_OPTIONS = {
+    basic: "basic",
+    article: "blog",
+    question: "question"
+  }
+
   # Author
   belongs_to :user
 
   # Owner, User or Group
   belongs_to :postable, polymorphic: true
 
+  belongs_to :parent, :class_name => 'Post', :optional => true
+  has_many :replies, :class_name => 'Post', :foreign_key => 'parent_id'
+
   enum status: STATUS_OPTIONS
+  enum kind: KIND_OPTIONS
 
   validates :user, presence: true
   validates :postable, presence: true
@@ -22,14 +35,10 @@ class Post < ApplicationRecord
   }
 
   after_initialize :set_defaults, unless: :persisted?
-  # after_initialize :corrections
-
-  def type
-    :update
-  end
 
   def set_defaults
     self.status = "draft"
+    self.kind = "basic"
   end
 
   def to_param
