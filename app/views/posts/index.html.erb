@@ -11,9 +11,10 @@
   <% end %>
 
   <% @posts.each do |post| %>
-   <%= render 'posts/shared/post', post: post, postable: @postable %>
+    <%= render 'posts/shared/post', post: post, postable: @postable %>
   <% end %>
 </section>
 
 <br>
-<%= link_to 'New Post', new_polymorphic_path([@postable, Post]) %>
+<%= paginate @posts %>
+<% link_to 'New Post', new_polymorphic_path([@postable, Post]) %>

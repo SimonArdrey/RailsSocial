@@ -15,6 +15,13 @@ GIT
       sprockets (>= 3.0, < 4.1)
       sprockets-es6 (>= 0.9.2)
 
+GIT
+  remote: https://github.com/orgsync/active_interaction.git
+  revision: cad275e4a319dee060fd6cb88954feba991ef1fd
+  specs:
+    active_interaction (3.5.3)
+      activemodel (>= 4, < 6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -251,12 +258,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_interaction!
   activeadmin!
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   devise
   jbuilder (~> 2.5)
+  kaminari
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.7)
   rails (~> 5.1.3)
