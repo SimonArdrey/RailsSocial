@@ -27,10 +27,29 @@ class BuildPostsFeed < ApplicationService
       where[:user] = author_user
     end
 
-    Post
+    posts = Post
       .includes(:user, :postable, :parent, replies: [:user])
       .where(where)
       .order(created_at: :desc)
       .page(page)
+
+    post_ids = posts.map { |post| post.id }
+
+    like_counts = PostRating
+      .where(kind: 'like')
+      .group(:post_id)
+      .count
+
+    post_ids_the_viewer_likes = PostRating
+      .where(post_id: post_ids, user_id: viewing_user.id, kind: 'like')
+      .pluck(:post_id)
+
+    # Update posts with prefeched info
+    posts.each do |post|
+      post.like_count = like_counts[post.id] || 0
+      post.liked_by = (post_ids_the_viewer_likes.include?(post.id)) ? [viewing_user.id] : []
+    end
+
+    posts
   end
 end

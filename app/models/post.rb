@@ -9,6 +9,7 @@ class Post < ApplicationRecord
 
   belongs_to :parent, :class_name => 'Post', :optional => true
   has_many :replies, :class_name => 'Post', :foreign_key => 'parent_id'
+  has_many :post_ratings
 
   enum status: {
     draft: 0,
@@ -42,6 +43,32 @@ class Post < ApplicationRecord
   end
 
   def to_param
-    title.empty? ? id : "#{id.to_s}-#{[title.parameterize].join("-")}"
+    if title and !title.empty?
+      "#{id.to_s}-#{[title.parameterize].join("-")}"
+    else
+      id
+    end
+  end
+
+  def like_count
+    @like_count ? @like_count : PostRating.where(post: self, kind: 'like').count
+  end
+
+  def like_count=(count)
+    @like_count = count
+  end
+
+  def liked_by?(user)
+    if @liked_by_ids
+      @liked_by_ids.include?(user.id)
+    else
+      is_liked = PostRating.where(post: self, user: user, kind: 'like').exists?
+      @liked_by_ids = is_liked ? [user.id] : nil
+      is_liked
+    end
+  end
+
+  def liked_by=(ids)
+    @liked_by_ids = ids
   end
 end

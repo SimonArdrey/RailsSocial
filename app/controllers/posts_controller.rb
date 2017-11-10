@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, except: [:index, :create]
   before_action :set_new_post, only: [:index, :new]
   before_action :set_postable
 
@@ -72,9 +72,31 @@ class PostsController < ApplicationController
   end
 
   def like
+    if PostRating.where(user: current_user, post: @post, kind: 'like').empty?
+      PostRating.create!(user: current_user, post: @post, kind: 'like', value: 1)
+    end
+
+    @like_count = PostRating.where(post: @post, kind: 'like').count
+    @liked = true
+
+    respond_to do |format|
+      format.html { redirect_to [@postable, @post], notice: "You just liked a Post" }
+      format.js {}
+    end
   end
 
   def unlike
+    if PostRating.where(user: current_user, post: @post, kind: 'like').exists?
+      PostRating.where(user: current_user, post: @post, kind: 'like').destroy_all
+    end
+
+    @like_count = PostRating.where(post: @post, kind: 'like').count
+    @liked = false
+
+    respond_to do |format|
+      format.html { redirect_to [@postable, @post], notice: "You just unliked a Post" }
+      format.js {}
+    end
   end
 
   private

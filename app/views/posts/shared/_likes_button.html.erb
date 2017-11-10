@@ -1,0 +1,6 @@
+<div class="likes-button" data-post-id="<%= post.id %>">
+  <%= link_to liked ? unlike_post_path(post.id) : like_post_path(post.id), method: :post, remote: true do %>
+    <span class="icon is-small <%= liked ? 'has-text-success' : '' %>"><i class="fa fa-heart"></i></span>
+  <% end %>
+  <span><%= like_count %></span>
+</div>

@@ -15,10 +15,7 @@
     <nav class="level is-mobile">
       <div class="level-left">
         <div class="level-item">
-          <a class="">
-            <span class="icon is-small"><i class="fa fa-heart"></i></span>
-          </a>
-          <span>&nbsp;12</span>
+          <%= render 'posts/shared/likes_button', post: post, like_count: post.like_count, liked: post.liked_by?(current_user) %>
         </div>
       </div>
     </nav>
