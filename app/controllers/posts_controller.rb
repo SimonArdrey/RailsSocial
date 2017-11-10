@@ -76,12 +76,9 @@ class PostsController < ApplicationController
       PostRating.create!(user: current_user, post: @post, kind: 'like', value: 1)
     end
 
-    @like_count = PostRating.where(post: @post, kind: 'like').count
-    @liked = true
-
     respond_to do |format|
       format.html { redirect_to [@postable, @post], notice: "You just liked a Post" }
-      format.js {}
+      format.js { render 'like' }
     end
   end
 
@@ -90,12 +87,9 @@ class PostsController < ApplicationController
       PostRating.where(user: current_user, post: @post, kind: 'like').destroy_all
     end
 
-    @like_count = PostRating.where(post: @post, kind: 'like').count
-    @liked = false
-
     respond_to do |format|
       format.html { redirect_to [@postable, @post], notice: "You just unliked a Post" }
-      format.js {}
+      format.js { render 'like' }
     end
   end
 
